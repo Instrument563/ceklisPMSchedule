@@ -1,198 +1,198 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist Perawatan</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <style>
-        body{font-family:Arial,sans-serif;margin:20px;background-color:#f4f4f4;color:#333}h1{text-align:center;color:#333;line-height:1.4}.selector-container{text-align:center;margin-bottom:20px}#day-selector,#generate-pdf-btn{background-color:#fff;color:#333;border:1px solid #ccc}#day-selector{padding:8px;font-size:16px;border-radius:5px}#generate-pdf-btn{padding:8px 15px;font-size:15px;margin-left:10px;background-color:#28a745;color:#fff;cursor:pointer;border-radius:5px;border-color:#28a745}#generate-pdf-btn:hover{background-color:#218838}#checklist-container{max-width:1200px;margin:0 auto}.checklist-table{width:100%;border-collapse:collapse;background-color:#fff;box-shadow:0 0 10px rgba(0,0,0,.1);display:none;table-layout:fixed;}.checklist-table:first-of-type{display:table}.checklist-table th,.checklist-table td{border:1px solid #333;padding:8px;vertical-align:middle;word-wrap:break-word;}.checklist-table td{text-align:left}
-        .header-title{font-size:16px;font-weight:700;background-color:#fff;color:#000;text-align:center;position:relative;padding:10px 80px}
-        .column-headers{background-color:#f2f2f2;font-weight:700}.column-headers th{text-align:center}.checklist-table td:has(input[type=checkbox]),.checklist-table td:first-child{text-align:center}.area-vertical,.vertical-header{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;text-align:center}.vertical-header{white-space:nowrap;font-size:12px}.remarks-input,.info-input,.note-area,input[type=date]{background-color:#fff;color:#333;border:1px solid #ccc}.remarks-input{width:95%;padding:5px;border-radius:3px}.remarks-input:focus,.info-input:focus,.note-area:focus{outline:1px solid #007bff;border-color:#007bff}.info-input{width:98%;border-radius:3px;padding:4px;font-size:14px}.note-area{width:99%;height:80px;padding:5px;font-family:Arial,sans-serif;font-size:14px;resize:vertical}.logo{position:absolute;top:50%;transform:translateY(-50%);height:60px}.logo.left{left:15px}.logo.right{right:15px}
-        .pdf-export .area-vertical,.pdf-export .vertical-header{writing-mode:initial !important;transform:none !important}
-        .pdf-export .logo { display: none !important; } .no-border { border: none !important; }
-        
-        /* ATURAN LEBAR KOLOM DISEDERHANAKAN DI SINI */
-        .no-column { width: 5%; }
-        .checkbox-column { width: 6%; }
-        .area-column {width: 8%;}
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Perawatan</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body{font-family:Arial,sans-serif;margin:20px;background-color:#f4f4f4;color:#333}h1{text-align:center;color:#333;line-height:1.4}.selector-container{text-align:center;margin-bottom:20px}#day-selector,#generate-pdf-btn{background-color:#fff;color:#333;border:1px solid #ccc}#day-selector{padding:8px;font-size:16px;border-radius:5px}#generate-pdf-btn{padding:8px 15px;font-size:15px;margin-left:10px;background-color:#28a745;color:#fff;cursor:pointer;border-radius:5px;border-color:#28a745}#generate-pdf-btn:hover{background-color:#218838}#checklist-container{max-width:1200px;margin:0 auto}.checklist-table{width:100%;border-collapse:collapse;background-color:#fff;box-shadow:0 0 10px rgba(0,0,0,.1);display:none;table-layout:fixed;}.checklist-table:first-of-type{display:table}.checklist-table th,.checklist-table td{border:1px solid #333;padding:8px;vertical-align:middle;word-wrap:break-word;}.checklist-table td{text-align:left}
+        .header-title{font-size:16px;font-weight:700;background-color:#fff;color:#000;text-align:center;position:relative;padding:10px 80px}
+        .column-headers{background-color:#f2f2f2;font-weight:700}.column-headers th{text-align:center}.checklist-table td:has(input[type=checkbox]),.checklist-table td:first-child{text-align:center}.area-vertical,.vertical-header{writing-mode:vertical-rl;transform:rotate(180deg);font-weight:700;text-align:center}.vertical-header{white-space:nowrap;font-size:12px}.remarks-input,.info-input,.note-area,input[type=date]{background-color:#fff;color:#333;border:1px solid #ccc}.remarks-input{width:95%;padding:5px;border-radius:3px}.remarks-input:focus,.info-input:focus,.note-area:focus{outline:1px solid #007bff;border-color:#007bff}.info-input{width:98%;border-radius:3px;padding:4px;font-size:14px}.note-area{width:99%;height:80px;padding:5px;font-family:Arial,sans-serif;font-size:14px;resize:vertical}.logo{position:absolute;top:50%;transform:translateY(-50%);height:60px}.logo.left{left:15px}.logo.right{right:15px}
+        .pdf-export .area-vertical,.pdf-export .vertical-header{writing-mode:initial !important;transform:none !important}
+        .pdf-export .logo { display: none !important; } .no-border { border: none !important; }
+        
+        /* ATURAN LEBAR KOLOM DISEDERHANAKAN DI SINI */
+        .no-column { width: 5%; }
+        .checkbox-column { width: 6%; }
+        .area-column {width: 8%;}
+    </style>
 </head>
 <body>
 
-    <h1>Checklist Harian Peralatan<br>Regu Instrument Rawmill 4</h1>
+    <h1>Checklist Harian Peralatan<br>Regu Instrument Rawmill 4</h1>
 
-    <div class="selector-container">
-        <label for="day-selector">Pilih Hari: </label>
-        <select id="day-selector">
-            <option value="senin">Senin</option>
-            <option value="selasa">Selasa</option>
-            <option value="rabu">Rabu</option>
-            <option value="kamis">Kamis</option>
-            <option value="jumat">Jumat</option>
-        </select>
-        <button id="generate-pdf-btn">Generate PDF</button>
-    </div>
+    <div class="selector-container">
+        <label for="day-selector">Pilih Hari: </label>
+        <select id="day-selector">
+            <option value="senin">Senin</option>
+            <option value="selasa">Selasa</option>
+            <option value="rabu">Rabu</option>
+            <option value="kamis">Kamis</option>
+            <option value="jumat">Jumat</option>
+        </select>
+        <button id="generate-pdf-btn">Generate PDF</button>
+    </div>
 
-    <div id="checklist-container"></div>
+    <div id="checklist-container"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            const checklistData = {
-                senin: {
-                    inspectionTitle: "INSPEKSI FINISH MILL SAMPAI TOP DOME",
-                    areaInspeksi: "Finish Mill, Dome",
-                    headers: ["589.CCTV.ER.SBB", "550.L.G01.A01", "544.H.G4.1.0A01", "542.B.U.02.A01", "544.I.M.D.01"],
-                    items: [
-                        { no: 1, area: 'CCTV', task: 'Cek Optibox', standard: 'Bersih', rowspan: 3 }, { no: 2, task: 'Cek Trafo', standard: 'Bersih' }, { no: 3, task: 'Cek Kualitas Gambar/Lensa', standard: 'Bersih' },
-                        { no: 4, area: 'ELECTRICAL', task: 'Cek Modul Dan Panel PLC', standard: 'Bersih', rowspan: 5 }, { no: 5, task: 'Ukur Tegangan PS', standard: 'Toleransi +- 10%' }, { no: 6, task: 'Cek Alarm CPU', standard: 'Reset' }, { no: 7, task: 'Cek Baterai', standard: 'Bersih/tidak low batt' }, { no: 8, task: 'Cek Spare Fuse', standard: 'Min 5 ea' }
-                    ]
-                },
-                selasa: {
-                    inspectionTitle: "INSPEKSI AREA RAW MILL",
-                    areaInspeksi: "Raw Mill, Silo",
-                    headers: ["RTD-01", "RTD-02", "MOTOR-A"],
-                    items: [
-                        { no: 1, area: 'Sensor Suhu', task: 'Kalibrasi Sensor RTD', standard: 'Akurat', rowspan: 2 }, { no: 2, task: 'Pemeriksaan Kabel', standard: 'Tidak ada kerusakan' },
-                        { no: 3, area: 'Motor', task: 'Cek Arus Motor Utama', standard: '< 50A' }
-                    ]
-                },
-                rabu: {
-                    inspectionTitle: "PEMERIKSAAN PANEL DISTRIBUSI",
-                    areaInspeksi: "Gedung CCR, MCC",
-                    headers: ["PANEL-01"],
-                    items: [{ no: 1, area: 'Panel Listrik', task: 'Pembersihan Panel Utama', standard: 'Bersih & Kencang' }]
-                },
-                kamis: {
-                    inspectionTitle: "Pengecekan Sistem Pneumatik",
-                    areaInspeksi: "Area Kompresor",
-                    headers: ["VALVE-01", "VALVE-02", "COMP-A", "COMP-B"],
-                    items: [ { no: 1, area: 'Pneumatik', task: 'Cek Tekanan Angin', standard: '6-8 Bar', rowspan: 2 }, { no: 2, task: 'Cek Selenoid Valve', standard: 'Berfungsi Baik' }]
-                },
-                jumat: {
-                    inspectionTitle: "MAINTENANCE JARINGAN & UPS",
-                    areaInspeksi: "Ruang Server, Ruang Kontrol",
-                    headers: ["UPS-A", "UPS-B", "SWITCH-01"],
-                    items: [ { no: 1, area: 'UPS', task: 'Pembersihan Unit UPS', standard: 'Bersih' }, { no: 2, area: 'Jaringan', task: 'Cek Koneksi Ethernet', standard: 'Stabil' }]
-                }
-            };
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const checklistData = {
+                senin: {
+                    inspectionTitle: "INSPEKSI FINISH MILL SAMPAI TOP DOME",
+                    areaInspeksi: "Finish Mill, Dome",
+                    headers: ["589.CCTV.ER.SBB", "550.L.G01.A01", "544.H.G4.1.0A01", "542.B.U.02.A01", "544.I.M.D.01"],
+                    items: [
+                        { no: 1, area: 'CCTV', task: 'Cek Optibox', standard: 'Bersih', rowspan: 3 }, { no: 2, task: 'Cek Trafo', standard: 'Bersih' }, { no: 3, task: 'Cek Kualitas Gambar/Lensa', standard: 'Bersih' },
+                        { no: 4, area: 'ELECTRICAL', task: 'Cek Modul Dan Panel PLC', standard: 'Bersih', rowspan: 5 }, { no: 5, task: 'Ukur Tegangan PS', standard: 'Toleransi +- 10%' }, { no: 6, task: 'Cek Alarm CPU', standard: 'Reset' }, { no: 7, task: 'Cek Baterai', standard: 'Bersih/tidak low batt' }, { no: 8, task: 'Cek Spare Fuse', standard: 'Min 5 ea' }
+                    ]
+                },
+                selasa: {
+                    inspectionTitle: "INSPEKSI AREA RAW MILL",
+                    areaInspeksi: "Raw Mill, Silo",
+                    headers: ["RTD-01", "RTD-02", "MOTOR-A"],
+                    items: [
+                        { no: 1, area: 'Sensor Suhu', task: 'Kalibrasi Sensor RTD', standard: 'Akurat', rowspan: 2 }, { no: 2, task: 'Pemeriksaan Kabel', standard: 'Tidak ada kerusakan' },
+                        { no: 3, area: 'Motor', task: 'Cek Arus Motor Utama', standard: '< 50A' }
+                    ]
+                },
+                rabu: {
+                    inspectionTitle: "PEMERIKSAAN PANEL DISTRIBUSI",
+                    areaInspeksi: "Gedung CCR, MCC",
+                    headers: ["PANEL-01"],
+                    items: [{ no: 1, area: 'Panel Listrik', task: 'Pembersihan Panel Utama', standard: 'Bersih & Kencang' }]
+                },
+                kamis: {
+                    inspectionTitle: "Pengecekan Sistem Pneumatik",
+                    areaInspeksi: "Area Kompresor",
+                    headers: ["VALVE-01", "VALVE-02", "COMP-A", "COMP-B"],
+                    items: [ { no: 1, area: 'Pneumatik', task: 'Cek Tekanan Angin', standard: '6-8 Bar', rowspan: 2 }, { no: 2, task: 'Cek Selenoid Valve', standard: 'Berfungsi Baik' }]
+                },
+                jumat: {
+                    inspectionTitle: "MAINTENANCE JARINGAN & UPS",
+                    areaInspeksi: "Ruang Server, Ruang Kontrol",
+                    headers: ["UPS-A", "UPS-B", "SWITCH-01"],
+                    items: [ { no: 1, area: 'UPS', task: 'Pembersihan Unit UPS', standard: 'Bersih' }, { no: 2, area: 'Jaringan', task: 'Cek Koneksi Ethernet', standard: 'Stabil' }]
+                }
+            };
 
-            const tableTemplate = (day) => {
-                const data = checklistData[day];
-                if (!data) return '';
-                const headerCount = data.headers ? data.headers.length : 0;
-                const totalColumns = 5 + headerCount;
-                const createHeaderRows = () => (data.headers || []).map(header => `<th class="vertical-header checkbox-column">${header}</th>`).join('');
-                const createChecklistRows = () => {
-                    if (!data.items) return '';
-                    return data.items.map(item => {
-                        let areaCell = item.area ? `<td class="area-column area-vertical" rowspan="${item.rowspan || 1}">${item.area}</td>` : '';
-                        let checkboxes = Array(headerCount).fill('<td class="checkbox-column"><input type="checkbox"></td>').join('');
-                        return `<tr><td class="no-column">${item.no}</td>${areaCell}<td>${item.task}</td><td>${item.standard}</td>${checkboxes}<td><input type="text" class="remarks-input"></td></tr>`;
-                    }).join('');
-                };
-                const signatureColspan1 = Math.floor((totalColumns - 2) / 2);
-                const signatureColspan2 = totalColumns - 2 - signatureColspan1;
-                return `
-                <table id="checklist-${day}" class="checklist-table">
-                    <thead>
-                        <tr><th colspan="${totalColumns}" class="header-title">
-                            <img src="logo.png" alt="Logo Tonasa" class="logo left">
-                            PT. SEMEN TONASA <br> PREVENTIVE MAINTENANCE SCHEDULING (PM.Schedule) <br> CHECK-LIST <br> ${data.inspectionTitle || 'INSPEKSI UMUM'}
-                            <img src="logo_sig.png" alt="Logo SIG" class="logo right">
-                        </th></tr>
-                        <tr><td colspan="${Math.ceil(totalColumns / 2)}" style="text-align: left;"><div><b>Departemen:</b> Maintenance</div><div><b>Site:</b> Unit of Eling Maintenance 2</div><div><b>Seksi:</b> Pemeliharaan Instrument RKC 4/5</div><div><b>Area Inspeksi:</b> ${data.areaInspeksi || ''}</div></td><td colspan="${Math.floor(totalColumns / 2)}"><b>WO.NO:</b> <br><b>Date:</b> <span class="full-date"></span> <span class="real-time-clock"></span></td></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td colspan="${totalColumns}" style="padding: 8px; text-align: left; vertical-align: top;">
-                            <div style="display: flex; gap: 20px;">
-                                <div style="width: 50%;">
-                                    <b>1. Safety</b>
-                                    <table style="width: 100%; border: none; font-size: 14px; vertical-align: middle;"><tbody>
-                                        <tr><td style="width: 30%; border: none; padding: 2px;">Hazard :</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
-                                        <tr><td style="width: 30%; border: none; padding: 2px;">Isolation :</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
-                                        <tr><td style="width: 30%; border: none; padding: 2px;">PPE :</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
-                                        <tr><td style="width: 30%; border: none; padding: 2px;">Reference :</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
-                                    </tbody></table>
-                                </div>
-                                <div style="width: 50%;">
-                                    <b>2. Tools</b>
-                                    <table style="width: 100%; border: none; font-size: 14px; vertical-align: middle;"><tbody>
-                                        <tr><td style="width: 30%; border: none; padding: 2px;">1)</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
-                                        <tr><td style="width: 30%; border: none; padding: 2px;">2)</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
-                                        <tr><td style="width: 30%; border: none; padding: 2px;">3)</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
-                                        <tr><td style="width: 30%; border: none; padding: 2px;">4)</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
-                                    </tbody></table>
-                                </div>
-                            </div>
-                        </td></tr>
-                        <tr class="column-headers">
-                            <th class="no-column">No</th><th class="area-column">Area</th><th>Task</th><th>Standard</th>
-                            ${createHeaderRows()}
-                            <th>Remarks</th>
-                        </tr>
-                        ${createChecklistRows()}
-                        <tr>
-                            <td class="no-border" colspan="2"><div style="display: flex; align-items: center; gap: 8px;"><b>Date:</b><input type="date" class="info-input" style="flex-grow: 1;"></div></td>
-                            <td class="no-border" colspan="${totalColumns - 4}" style="text-align: center;"><b>Signed by Inspector :</b></td>
-                            <td class="no-border" colspan="2"><b>Name:</b> <input type="text" class="info-input" style="width: 80%;"></td>
-                        </tr>
-                        <tr>
-                            <td class="no-border" colspan="2"><div style="display: flex; align-items: center; gap: 8px;"><b>Date:</b><input type="date" class="info-input" style="flex-grow: 1;"></div></td>
-                            <td class="no-border" colspan="${totalColumns - 4}" style="text-align: center;"><b>Signed by Supervisor :</b></td>
-                            <td class="no-border" colspan="2"><b>Name:</b> <input type="text" class="info-input" style="width: 80%;"></td>
-                        </tr>
-                        <tr><td class="no-border" colspan="${totalColumns}" style="text-align: left;"><b>Note :</b><br><textarea class="note-area"></textarea></td></tr>
-                    </tbody>
-                </table>`;
-            };
+            const tableTemplate = (day) => {
+                const data = checklistData[day];
+                if (!data) return '';
+                const headerCount = data.headers ? data.headers.length : 0;
+                const totalColumns = 5 + headerCount;
+                const createHeaderRows = () => (data.headers || []).map(header => `<th class="vertical-header checkbox-column">${header}</th>`).join('');
+                const createChecklistRows = () => {
+                    if (!data.items) return '';
+                    return data.items.map(item => {
+                        let areaCell = item.area ? `<td class="area-column area-vertical" rowspan="${item.rowspan || 1}">${item.area}</td>` : '';
+                        let checkboxes = Array(headerCount).fill('<td class="checkbox-column"><input type="checkbox"></td>').join('');
+                        return `<tr><td class="no-column">${item.no}</td>${areaCell}<td>${item.task}</td><td>${item.standard}</td>${checkboxes}<td><input type="text" class="remarks-input"></td></tr>`;
+                    }).join('');
+                };
+                const signatureColspan1 = Math.floor((totalColumns - 2) / 2);
+                const signatureColspan2 = totalColumns - 2 - signatureColspan1;
+                return `
+                <table id="checklist-${day}" class="checklist-table">
+                    <thead>
+                        <tr><th colspan="${totalColumns}" class="header-title">
+                            <img src="logo.png" alt="Logo Tonasa" class="logo left">
+                            PT. SEMEN TONASA <br> PREVENTIVE MAINTENANCE SCHEDULING (PM.Schedule) <br> CHECK-LIST <br> ${data.inspectionTitle || 'INSPEKSI UMUM'}
+                            <img src="logo_sig.png" alt="Logo SIG" class="logo right">
+                        </th></tr>
+                        <tr><td colspan="${Math.ceil(totalColumns / 2)}" style="text-align: left;"><div><b>Departemen:</b> Maintenance</div><div><b>Site:</b> Unit of Eling Maintenance 2</div><div><b>Seksi:</b> Pemeliharaan Instrument RKC 4/5</div><div><b>Area Inspeksi:</b> ${data.areaInspeksi || ''}</div></td><td colspan="${Math.floor(totalColumns / 2)}"><b>WO.NO:</b> <br><b>Date:</b> <span class="full-date"></span> <span class="real-time-clock"></span></td></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="${totalColumns}" style="padding: 8px; text-align: left; vertical-align: top;">
+                            <div style="display: flex; gap: 20px;">
+                                <div style="width: 50%;">
+                                    <b>1. Safety</b>
+                                    <table style="width: 100%; border: none; font-size: 14px; vertical-align: middle;"><tbody>
+                                        <tr><td style="width: 30%; border: none; padding: 2px;">Hazard :</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
+                                        <tr><td style="width: 30%; border: none; padding: 2px;">Isolation :</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
+                                        <tr><td style="width: 30%; border: none; padding: 2px;">PPE :</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
+                                        <tr><td style="width: 30%; border: none; padding: 2px;">Reference :</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
+                                    </tbody></table>
+                                </div>
+                                <div style="width: 50%;">
+                                    <b>2. Tools</b>
+                                    <table style="width: 100%; border: none; font-size: 14px; vertical-align: middle;"><tbody>
+                                        <tr><td style="width: 30%; border: none; padding: 2px;">1)</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
+                                        <tr><td style="width: 30%; border: none; padding: 2px;">2)</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
+                                        <tr><td style="width: 30%; border: none; padding: 2px;">3)</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
+                                        <tr><td style="width: 30%; border: none; padding: 2px;">4)</td><td style="width: 70%; border: none; padding: 2px;"><input type="text" class="info-input"></td></tr>
+                                    </tbody></table>
+                                </div>
+                            </div>
+                        </td></tr>
+                        <tr class="column-headers">
+                            <th class="no-column">No</th><th class="area-column">Area</th><th>Task</th><th>Standard</th>
+                            ${createHeaderRows()}
+                            <th>Remarks</th>
+                        </tr>
+                        ${createChecklistRows()}
+                        <tr>
+                            <td class="no-border" colspan="2"><div style="display: flex; align-items: center; gap: 8px;"><b>Date:</b><input type="date" class="info-input" style="flex-grow: 1;"></div></td>
+                            <td class="no-border" colspan="${totalColumns - 4}" style="text-align: center;"><b>Signed by Inspector :</b></td>
+                            <td class="no-border" colspan="2"><b>Name:</b> <input type="text" class="info-input" style="width: 80%;"></td>
+                        </tr>
+                        <tr>
+                            <td class="no-border" colspan="2"><div style="display: flex; align-items: center; gap: 8px;"><b>Date:</b><input type="date" class="info-input" style="flex-grow: 1;"></div></td>
+                            <td class="no-border" colspan="${totalColumns - 4}" style="text-align: center;"><b>Signed by Supervisor :</b></td>
+                            <td class="no-border" colspan="2"><b>Name:</b> <input type="text" class="info-input" style="width: 80%;"></td>
+                        </tr>
+                        <tr><td class="no-border" colspan="${totalColumns}" style="text-align: left;"><b>Note :</b><br><textarea class="note-area"></textarea></td></tr>
+                    </tbody>
+                </table>`;
+            };
 
-            const checklistContainer = document.getElementById('checklist-container');
-            Object.keys(checklistData).forEach(day => { checklistContainer.innerHTML += tableTemplate(day); });
-            
-            const daySelector = document.getElementById('day-selector');
-            const allChecklists = document.querySelectorAll('.checklist-table');
-            const pdfButton = document.getElementById('generate-pdf-btn');
-            const today = new Date();
-            const namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-            const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            const checklistContainer = document.getElementById('checklist-container');
+            Object.keys(checklistData).forEach(day => { checklistContainer.innerHTML += tableTemplate(day); });
+            
+            const daySelector = document.getElementById('day-selector');
+            const allChecklists = document.querySelectorAll('.checklist-table');
+            const pdfButton = document.getElementById('generate-pdf-btn');
+            const today = new Date();
+            const namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+            const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
-            function showChecklist() {
-                const selectedDay = daySelector.value;
-                allChecklists.forEach(table => table.style.display = 'none');
-                const activeChecklist = document.getElementById('checklist-' + selectedDay);
-                if (activeChecklist) activeChecklist.style.display = 'table';
-            }
+            function showChecklist() {
+                const selectedDay = daySelector.value;
+                allChecklists.forEach(table => table.style.display = 'none');
+                const activeChecklist = document.getElementById('checklist-' + selectedDay);
+                if (activeChecklist) activeChecklist.style.display = 'table';
+            }
 
-            function updateClock() {
-                const now = new Date();
-                const timeString = [String(now.getHours()).padStart(2,'0'), String(now.getMinutes()).padStart(2,'0'), String(now.getSeconds()).padStart(2,'0')].join(':');
-                document.querySelectorAll('.real-time-clock').forEach(clock => clock.textContent = timeString);
-            }
+            function updateClock() {
+                const now = new Date();
+                const timeString = [String(now.getHours()).padStart(2,'0'), String(now.getMinutes()).padStart(2,'0'), String(now.getSeconds()).padStart(2,'0')].join(':');
+                document.querySelectorAll('.real-time-clock').forEach(clock => clock.textContent = timeString);
+            }
 
-            daySelector.addEventListener('change', showChecklist);
-            pdfButton.addEventListener('click', function() {
-                const selectedDayValue = daySelector.value;
-                const elementToPrint = document.getElementById('checklist-' + selectedDayValue);
-                const dayName = daySelector.options[daySelector.selectedIndex].text;
-                const options = { margin: [0.2,0.2,0.2,0.2], filename: `Checklist-${dayName}.pdf`, image: {type:'jpeg', quality:0.98}, html2canvas: {scale:2, useCORS:true}, jsPDF: {unit:'in', format:'legal', orientation:'landscape'} };
-                elementToPrint.classList.add('pdf-export');
-                html2pdf().from(elementToPrint).set(options).save().then(() => { 
-                    elementToPrint.classList.remove('pdf-export');
-                });
-            });
-            
-            const tanggalLengkap = `${namaHari[today.getDay()]}, ${today.getDate()} ${namaBulan[today.getMonth()]} ${today.getFullYear()}`;
-            document.querySelectorAll('.full-date').forEach(dateEl => dateEl.textContent = tanggalLengkap + " ");
-            updateClock();
-            setInterval(updateClock, 1000);
-            
-            const hariIniValue = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'][today.getDay()];
-            const optionHariIni = daySelector.querySelector(`option[value="${hariIniValue}"]`);
-            if (optionHariIni) { daySelector.value = hariIniValue; } else { daySelector.value = 'senin'; }
-            showChecklist();
-        });
-    </script>
+            daySelector.addEventListener('change', showChecklist);
+            pdfButton.addEventListener('click', function() {
+                const selectedDayValue = daySelector.value;
+                const elementToPrint = document.getElementById('checklist-' + selectedDayValue);
+                const dayName = daySelector.options[daySelector.selectedIndex].text;
+                const options = { margin: [0.2,0.2,0.2,0.2], filename: `Checklist-${dayName}.pdf`, image: {type:'jpeg', quality:0.98}, html2canvas: {scale:2, useCORS:true}, jsPDF: {unit:'in', format:'legal', orientation:'landscape'} };
+                elementToPrint.classList.add('pdf-export');
+                html2pdf().from(elementToPrint).set(options).save().then(() => { 
+                    elementToPrint.classList.remove('pdf-export');
+                });
+            });
+            
+            const tanggalLengkap = `${namaHari[today.getDay()]}, ${today.getDate()} ${namaBulan[today.getMonth()]} ${today.getFullYear()}`;
+            document.querySelectorAll('.full-date').forEach(dateEl => dateEl.textContent = tanggalLengkap + " ");
+            updateClock();
+            setInterval(updateClock, 1000);
+            
+            const hariIniValue = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'][today.getDay()];
+            const optionHariIni = daySelector.querySelector(`option[value="${hariIniValue}"]`);
+            if (optionHariIni) { daySelector.value = hariIniValue; } else { daySelector.value = 'senin'; }
+            showChecklist();
+        });
+    </script>
 </body>
 </html>
